@@ -708,6 +708,7 @@ MonoBehaviour:
   UnwalkableLayer:
     serializedVersion: 2
     m_Bits: 512
+  OnlyDisplayPath: 0
 --- !u!4 &1214296635
 Transform:
   m_ObjectHideFlags: 0

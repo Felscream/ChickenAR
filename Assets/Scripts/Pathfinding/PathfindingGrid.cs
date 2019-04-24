@@ -8,17 +8,37 @@ namespace Pathfinding {
         public Vector2 GridWorldSize;
         public float NodeRadius;
         public LayerMask UnwalkableLayer;
-
+        public bool OnlyDisplayPath;
         public List<Node> path;
 
         private Node[,] _grid;
         private float _nodeDiameter;
         private int _gridSizeX, _gridSizeY;
 
+        public int MaxSize
+        {
+            get
+            {
+                return _gridSizeX * _gridSizeY;
+            }
+        }
+
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireCube(transform.position, new Vector3(GridWorldSize.x, 1, GridWorldSize.y));
-            if (_grid != null) {
+
+            if (OnlyDisplayPath)
+            {
+                if (path != null)
+                {
+                    Gizmos.color = Color.cyan;
+                    foreach (Node n in path)
+                    {
+                        Gizmos.DrawCube(n.WorldPosition, (Vector3.right + Vector3.forward) * (_nodeDiameter - 0.1f) + Vector3.up * 0.2f);
+                    }
+                }
+            }
+            else if(_grid != null) {
                 foreach (Node n in _grid) {
                     Gizmos.color = n.IsWalkable ? Color.white : Color.red;
 
@@ -27,7 +47,7 @@ namespace Pathfinding {
                             Gizmos.color = Color.cyan;
                     }
 
-                    Gizmos.DrawCube(n.WorldPosition, Vector3.one * (_nodeDiameter - 0.1f));
+                    Gizmos.DrawCube(n.WorldPosition, (Vector3.right + Vector3.forward) * (_nodeDiameter - 0.1f) + Vector3.up * 0.2f);
                 }
             }
         }

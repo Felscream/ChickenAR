@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Pathfinding{
-    public class Node
+    public class Node : IHeapItem<Node>
     {
         public bool IsWalkable;
         public Vector3 WorldPosition;
@@ -14,7 +15,7 @@ namespace Pathfinding{
         public int HCost;
         public Node Parent;
 
-        public int fCost { get { return GCost - HCost; } }
+        public int FCost { get { return GCost + HCost; } }
 
         public Node(bool walk, Vector3 wp, int x, int y)
         {
@@ -22,6 +23,17 @@ namespace Pathfinding{
             WorldPosition = wp;
             GridX = x;
             GridY = y;
+        }
+
+        public override int CompareTo(Node other)
+        {
+            int compare = FCost.CompareTo(other.FCost);
+            if(compare == 0)
+            {
+                compare = HCost.CompareTo(other.HCost);
+            }
+
+            return -compare;
         }
     }
 }

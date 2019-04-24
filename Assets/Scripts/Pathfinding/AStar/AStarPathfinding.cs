@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
 namespace Pathfinding {
     public class AStarPathfinding : MonoBehaviour
     {
-
         public Transform seeker;
         public Transform target;
         private PathfindingGrid _grid;
@@ -14,43 +13,37 @@ namespace Pathfinding {
         {
             _grid = GetComponent<PathfindingGrid>();
             if (_grid == null) {
-                Debug.LogError(gameObject.name + "::Component of type PathfindingGrid not found");
+                UnityEngine.Debug.LogError(gameObject.name + "::Component of type PathfindingGrid not found");
                 enabled = false;
             }
         }
 
         private void Update()
         {
-            FindPath(seeker.position, target.position);    
+            if(Input.GetButtonDown("Jump"))
+                FindPath(seeker.position, target.position);    
         }
 
         private void FindPath(Vector3 startPosition, Vector3 targetPosition)
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
             Node startNode = _grid.WorldPositionToNode(startPosition);
             Node targetNode = _grid.WorldPositionToNode(targetPosition);
 
-            List<Node> openSet = new List<Node>();
+            MinHeap<Node> openSet = new MinHeap<Node>(_grid.MaxSize);
             HashSet<Node> closedSet = new HashSet<Node>();
 
             openSet.Add(startNode);
 
             while (openSet.Count > 0) {
-                Node current = openSet[0];
-                for (int i = 1; i < openSet.Count; ++i)
-                {
-                    if (openSet[i].fCost < current.fCost)
-                    {
-                        current = openSet[i];
-                    }
-                    else if (openSet[i].fCost == current.fCost && openSet[i].HCost < current.HCost) {
-                        current = openSet[i];
-                    }
-                }
-
-                openSet.Remove(current);
+                Node current = openSet.RemoveFirst();
                 closedSet.Add(current);
 
                 if (current == targetNode) {
+                    sw.Stop();
+                    print("Pathf found " + sw.ElapsedMilliseconds + " ms");
                     RetracePath(startNode, targetNode);
                     return;
                 }
