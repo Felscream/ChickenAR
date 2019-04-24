@@ -8,8 +8,7 @@ namespace Pathfinding {
         public Vector2 GridWorldSize;
         public float NodeRadius;
         public LayerMask UnwalkableLayer;
-        public bool OnlyDisplayPath;
-        public List<Node> path;
+        public bool DisplayGrid;
 
         private Node[,] _grid;
         private float _nodeDiameter;
@@ -27,32 +26,15 @@ namespace Pathfinding {
         {
             Gizmos.DrawWireCube(transform.position, new Vector3(GridWorldSize.x, 1, GridWorldSize.y));
 
-            if (OnlyDisplayPath)
-            {
-                if (path != null)
-                {
-                    Gizmos.color = Color.cyan;
-                    foreach (Node n in path)
-                    {
-                        Gizmos.DrawCube(n.WorldPosition, (Vector3.right + Vector3.forward) * (_nodeDiameter - 0.1f) + Vector3.up * 0.2f);
-                    }
-                }
-            }
-            else if(_grid != null) {
+            if(_grid != null && DisplayGrid) {
                 foreach (Node n in _grid) {
                     Gizmos.color = n.IsWalkable ? Color.white : Color.red;
-
-                    if (path != null) {
-                        if(path.Contains(n))
-                            Gizmos.color = Color.cyan;
-                    }
-
                     Gizmos.DrawCube(n.WorldPosition, (Vector3.right + Vector3.forward) * (_nodeDiameter - 0.1f) + Vector3.up * 0.2f);
                 }
             }
         }
 
-        private void Start()
+        private void Awake()
         {
             _nodeDiameter = 2 * NodeRadius;
             _gridSizeX = Mathf.RoundToInt(GridWorldSize.x / _nodeDiameter);
@@ -86,6 +68,11 @@ namespace Pathfinding {
             }
 
             return neighbours;
+        }
+
+        public void RefreshGrid()
+        {
+            CreateGrid();
         }
 
         private void CreateGrid() {
