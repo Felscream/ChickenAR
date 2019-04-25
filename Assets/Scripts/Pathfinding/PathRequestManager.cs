@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
+[RequireComponent(typeof(AStarPathfinding))]
 public class PathRequestManager : MonoBehaviour
 {
     struct PathRequest

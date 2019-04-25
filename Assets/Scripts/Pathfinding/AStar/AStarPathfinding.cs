@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Diagnostics;
 
 namespace Pathfinding {
+    [RequireComponent(typeof(PathfindingGrid))]
     public class AStarPathfinding : MonoBehaviour
     {
         private PathfindingGrid _grid;
@@ -76,6 +77,8 @@ namespace Pathfinding {
 
                             if (!openSet.Contains(neighbour))
                                 openSet.Add(neighbour);
+                            else
+                                openSet.UpdateItem(neighbour);
                         }
                     }
                 }

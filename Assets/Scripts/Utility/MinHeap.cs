@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class MinHeap<T> where T : IHeapItem<T>
 {
-    T[] items;
-    int currentItemCount;
+    private T[] items;
+    private int currentItemCount;
 
     public MinHeap(int maxHeapSize)
     {
@@ -48,7 +48,7 @@ public class MinHeap<T> where T : IHeapItem<T>
         return Equals(items[item.HeapIndex], item);
     }
 
-    void SortDown(T item)
+    private void SortDown(T item)
     {
         while (true)
         {
@@ -86,7 +86,7 @@ public class MinHeap<T> where T : IHeapItem<T>
         }
     }
 
-    void SortUp(T item)
+    private void SortUp(T item)
     {
         int parentIndex = (item.HeapIndex - 1) / 2;
 
@@ -106,7 +106,7 @@ public class MinHeap<T> where T : IHeapItem<T>
         }
     }
 
-    void Swap(T itemA, T itemB)
+    private void Swap(T itemA, T itemB)
     {
         items[itemA.HeapIndex] = itemB;
         items[itemB.HeapIndex] = itemA;

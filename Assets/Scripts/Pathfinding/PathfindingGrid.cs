@@ -3,16 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Pathfinding {
-    public class PathfindingGrid : MonoBehaviour
+    public class PathfindingGrid : BasicGrid<Node>
     {
-        public Vector2 GridWorldSize;
-        public float NodeRadius;
         public LayerMask UnwalkableLayer;
-        public bool DisplayGrid;
-
-        private Node[,] _grid;
-        private float _nodeDiameter;
-        private int _gridSizeX, _gridSizeY;
 
         public int MaxSize
         {
@@ -22,35 +15,25 @@ namespace Pathfinding {
             }
         }
 
-        private void OnDrawGizmos()
+        protected override void OnDrawGizmos()
         {
             Gizmos.DrawWireCube(transform.position, new Vector3(GridWorldSize.x, 1, GridWorldSize.y));
 
-            if(_grid != null && DisplayGrid) {
-                foreach (Node n in _grid) {
-                    Gizmos.color = n.IsWalkable ? Color.white : Color.red;
+            if (_grid != null && DisplayGrid)
+            {
+                foreach (Node n in _grid)
+                {
+                    Gizmos.color = n.IsWalkable ? Color.white : Color.black;
                     Gizmos.DrawCube(n.WorldPosition, (Vector3.right + Vector3.forward) * (_nodeDiameter - 0.1f) + Vector3.up * 0.2f);
                 }
             }
         }
 
-        private void Awake()
+        public Node GetNode(int x, int y)
         {
-            _nodeDiameter = 2 * NodeRadius;
-            _gridSizeX = Mathf.RoundToInt(GridWorldSize.x / _nodeDiameter);
-            _gridSizeY = Mathf.RoundToInt(GridWorldSize.y / _nodeDiameter);
-            CreateGrid();
-        }
-
-        public Node WorldPositionToNode(Vector3 worldPosition) {
-            float percentX = Mathf.Clamp01((worldPosition.x + GridWorldSize.x / 2) / GridWorldSize.x);
-            float percentY = Mathf.Clamp01((worldPosition.z + GridWorldSize.y / 2) / GridWorldSize.y);
-
-            int x = Mathf.RoundToInt((_gridSizeX - 1) * percentX);
-            int y = Mathf.RoundToInt((_gridSizeY - 1) * percentY);
             return _grid[x, y];
         }
-
+        
         public List<Node> GetNeighbours(Node node) {
             List<Node> neighbours = new List<Node>();
             for (int x = -1; x <= 1; x++) {
@@ -75,7 +58,7 @@ namespace Pathfinding {
             CreateGrid();
         }
 
-        private void CreateGrid() {
+        protected override void CreateGrid() {
             _grid = new Node[_gridSizeX, _gridSizeY];
             Vector3 worldBottomLeft = transform.position - Vector3.right * GridWorldSize.x / 2 - Vector3.forward * GridWorldSize.y / 2;
             for(int x = 0; x < _gridSizeX; ++x)
