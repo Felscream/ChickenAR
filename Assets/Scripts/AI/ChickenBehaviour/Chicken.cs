@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Chicken : MonoBehaviour
 {
-    public int Hunger;
-    public int Boredom;
+    public ChickenConstants.ChickenTitle Title;
+    public int HungerOverTime;
+    public int BoredomOverTime;
+
+    public string FirstName = "My First";
+    public string LastName = "Chicken";
+
 }

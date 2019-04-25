@@ -56,7 +56,7 @@ namespace Pathfinding {
                     if (current == targetNode)
                     {
                         sw.Stop();
-                        print("Path found " + sw.ElapsedMilliseconds + " ms");
+                        UnityEngine.Debug.Log("Path found " + sw.ElapsedMilliseconds + " ms");
                         pathSucces = true;
                         break;
                     }

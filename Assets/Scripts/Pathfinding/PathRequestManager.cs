@@ -25,6 +25,8 @@ public class PathRequestManager : MonoBehaviour
     private PathRequest _currentPathRequest;
     private AStarPathfinding _pathfinding;
 
+    private PathfindingGrid _grid;
+
     private bool _isProcessingPath;
 
     private static PathRequestManager _instance;
@@ -53,6 +55,7 @@ public class PathRequestManager : MonoBehaviour
         }
 
         _pathfinding = GetComponent<AStarPathfinding>();
+        _grid = GetComponent<PathfindingGrid>();
     }
 
     public static void RequestPath(Vector3 start, Vector3 target, Action<Vector3[], bool> callback)
@@ -77,5 +80,10 @@ public class PathRequestManager : MonoBehaviour
         _currentPathRequest.callback(path, success);
         _isProcessingPath = false;
         TryProcessNextRequest();
+    }
+
+    public static Node GetNode(Vector3 position)
+    {
+        return _instance._grid.WorldPositionToNode(position);
     }
 }

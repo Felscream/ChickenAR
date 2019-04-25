@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimeScaleManager : MonoBehaviour
 {
-    public float TimeScale = 1f;
+    public float Scale = 1f;
 
     private float _fixedDelta;
     private float _delta;
@@ -13,6 +13,7 @@ public class TimeScaleManager : MonoBehaviour
     public static TimeScaleManager Instance { get { return _instance; } }
     public static float Delta { get { return _instance._delta; } }
     public static float FixedDelta { get { return _instance._fixedDelta; } }
+    public static float TimeScale { get { return _instance.Scale; } }
 
     private void Awake()
     {

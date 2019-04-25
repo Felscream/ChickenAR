@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SA;
 
 public class Unit : MonoBehaviour
 {
-    public Transform Target;
+    [SerializeField] private Transform Target;
     public float Speed;
 
-    private Vector3[] _path;
-    private int _targetIndex;
+    protected Vector3[] _path;
+    protected int _targetIndex;
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         if(_path != null)
         {
@@ -31,12 +32,12 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         PathRequestManager.RequestPath(transform.position, Target.position, OnPathFound);
     }
 
-    public void OnPathFound(Vector3[] newPath, bool success)
+    protected void OnPathFound(Vector3[] newPath, bool success)
     {
         if (success)
         {
@@ -46,7 +47,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private IEnumerator FollowPath()
+    protected virtual IEnumerator FollowPath()
     {
         Vector3 currentWaypoint = _path[0];
         _targetIndex = 0;

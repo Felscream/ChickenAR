@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09f12a9b8fb5e44eb81fa499afbecc4, type: 3}
+  m_Name: Wander
+  m_EditorClassIdentifier: 
+  onFixed:
+  - {fileID: 11400000, guid: c5e5a1bdf787489478efe188ebd92df0, type: 2}
+  onUpdate: []
+  onEnter: []
+  onExit: []
+  idCount: 1
+  transitions:
+  - id: 0
+    condition: {fileID: 11400000, guid: c798f2ef8bc32e146940a6553a946eac, type: 2}
+    targetState: {fileID: 11400000, guid: df7ada7ba997c4843b85d995ab08095f, type: 2}
+    disable: 0

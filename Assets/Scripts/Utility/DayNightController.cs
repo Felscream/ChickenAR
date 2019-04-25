@@ -12,13 +12,12 @@ namespace DayNightSystem {
     }
 
     [RequireComponent(typeof(TimeScaleManager))]
-    public class DayNightController : MonoBehaviour
+    public class DayNightController : MonoBehaviour, ISubject
     {
         /// <summary>
         /// Virtual day length in real world seconds
         /// </summary>
         public float DayCycleLength = 120f;
-        public float CurrentCycleTime ;
         public DayPhase CurrentPhase;
         public float HoursPerDay = 24.0f;
         public float DawnTimeOffset = 3.0f;
@@ -29,14 +28,34 @@ namespace DayNightSystem {
         public Color DayFog = new Color(180.0f / 255.0f, 208.0f / 255.0f, 209.0f / 255.0f);
         public Color NightFog = new Color(12.0f / 255.0f, 15.0f / 255.0f, 91.0f / 255.0f);
 
+        public string DawnAudio = "ChickenDawn";
+        public string DuskAudio = "OwlDusk";
+
         private float _dawnTime;
         private float _dayTime;
         private float _duskTime;
         private float _nightTime;
         private float _quarterDay;
         private float _lightIntensity;
+        private float _currentCycleTime;
 
         private Light _light;
+
+        private List<IObserver> _observers;
+
+        public float CurrentCycleTime
+        {
+            get { return _currentCycleTime; }
+            set
+            {
+                _currentCycleTime = value % DayCycleLength;
+            }
+        }
+
+        private void Awake()
+        {
+            _observers = new List<IObserver>();    
+        }
 
         private void Start()
         {
@@ -67,8 +86,12 @@ namespace DayNightSystem {
             UpdateDayLight();
             UpdateFog();
 
-            CurrentCycleTime += TimeScaleManager.Delta;
-            CurrentCycleTime = CurrentCycleTime % DayCycleLength;
+            _currentCycleTime += TimeScaleManager.Delta;
+            if(CurrentCycleTime >= DayCycleLength)
+            {
+                NotifyObservers();
+            }
+            _currentCycleTime %= DayCycleLength;
         }
 
         public void SetDawn()
@@ -78,6 +101,7 @@ namespace DayNightSystem {
                 _light.enabled = true;
             }
             CurrentPhase = DayPhase.Dawn;
+            Audio.AudioManager.PlaySoundEffect(DawnAudio);
         }
 
         public void SetDay()
@@ -92,6 +116,7 @@ namespace DayNightSystem {
         public void SetDusk()
         {
             CurrentPhase = DayPhase.Dusk;
+            Audio.AudioManager.PlaySoundEffect(DuskAudio);
         }
 
         public void SetNight()
@@ -110,8 +135,6 @@ namespace DayNightSystem {
             _dayTime = _dawnTime + _quarterDay;
             _duskTime = _dayTime + _quarterDay;
             _nightTime = _duskTime + _quarterDay;
-
-            CurrentCycleTime = _dayTime;
 
             if(_light != null)
             {
@@ -152,7 +175,7 @@ namespace DayNightSystem {
                 }
             }
 
-            transform.Rotate(Vector3.up * ((TimeScaleManager.Delta / DayCycleLength) * 360.0f), Space.Self);
+            transform.localEulerAngles = new Vector3((CurrentCycleTime / DayCycleLength) * 360f, -90f, -90f);
         }
 
         private void UpdateFog()
@@ -182,6 +205,33 @@ namespace DayNightSystem {
         private void UpdateWorldTime()
         {
             WorldTimeHour = (int)((Mathf.Ceil((CurrentCycleTime / DayCycleLength) * HoursPerDay) + DawnTimeOffset) % HoursPerDay) + 1;
+        }
+
+        public void AddObserver(IObserver o)
+        {
+            if (!_observers.Contains(o))
+            {
+                _observers.Add(o);
+            }
+        }
+
+        public void RemoveObserver(IObserver o)
+        {
+            int id = _observers.FindIndex(x => x.Equals(o));
+            Debug.Log(id);
+            if (id != -1)
+            {
+                Debug.Log("observer found");
+                _observers.RemoveAt(id);
+            }
+        }
+
+        public void NotifyObservers()
+        {
+            for(int i = 0; i < _observers.Count; i++)
+            {
+                _observers[i].ObserverUpdate();
+            }
         }
     }
 }
