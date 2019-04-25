@@ -290,8 +290,9 @@ GameObject:
   - component: {fileID: 170076735}
   - component: {fileID: 170076734}
   - component: {fileID: 170076736}
+  - component: {fileID: 170076737}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: DayNightSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -372,6 +373,19 @@ MonoBehaviour:
   DawnDuskFog: {r: 0.52156866, g: 0.4862745, b: 0.4, a: 1}
   DayFog: {r: 0.7058824, g: 0.8156863, b: 0.81960785, a: 1}
   NightFog: {r: 0.31425774, g: 0.32987213, b: 0.6226415, a: 1}
+--- !u!114 &170076737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170076733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d6248cb180724249aebacb33459181d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeScale: 1
 --- !u!1 &433936243
 GameObject:
   m_ObjectHideFlags: 0

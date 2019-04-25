@@ -11,6 +11,7 @@ namespace DayNightSystem {
         Dusk
     }
 
+    [RequireComponent(typeof(TimeScaleManager))]
     public class DayNightController : MonoBehaviour
     {
         /// <summary>
@@ -66,7 +67,7 @@ namespace DayNightSystem {
             UpdateDayLight();
             UpdateFog();
 
-            CurrentCycleTime += Time.deltaTime;
+            CurrentCycleTime += TimeScaleManager.Delta;
             CurrentCycleTime = CurrentCycleTime % DayCycleLength;
         }
 
@@ -151,7 +152,7 @@ namespace DayNightSystem {
                 }
             }
 
-            transform.Rotate(Vector3.up * ((Time.deltaTime / DayCycleLength) * 360.0f), Space.Self);
+            transform.Rotate(Vector3.up * ((TimeScaleManager.Delta / DayCycleLength) * 360.0f), Space.Self);
         }
 
         private void UpdateFog()

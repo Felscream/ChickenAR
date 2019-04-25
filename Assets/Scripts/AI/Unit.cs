@@ -62,7 +62,9 @@ public class Unit : MonoBehaviour
                 currentWaypoint = _path[_targetIndex];
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, Speed * Time.deltaTime);
+            float delta = TimeScaleManager.Instance != null ? TimeScaleManager.Delta : Time.deltaTime;
+
+            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, Speed * delta);
             yield return null;
         }
     }
