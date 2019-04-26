@@ -168,7 +168,8 @@ MonoBehaviour:
   chunkSizeMin: 400
   chunkSizeMax: 700
   landPercentage: 80
-  highRiseProbability: 0.9
+  highRiseProbability: 0.3
+  SinkProbability: 0.2
 --- !u!4 &162310600
 Transform:
   m_ObjectHideFlags: 0
