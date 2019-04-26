@@ -26,7 +26,7 @@ public abstract class BasicGrid<T> : MonoBehaviour where T : BasicGridTile
         }
     }
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         _nodeDiameter = 2 * NodeRadius;
         _gridSizeX = Mathf.RoundToInt(GridWorldSize.x / _nodeDiameter);
@@ -49,6 +49,6 @@ public abstract class BasicGrid<T> : MonoBehaviour where T : BasicGridTile
         return _grid[x, y];
     }
 
-    protected abstract void CreateGrid();
+    public abstract void CreateGrid();
 
 }

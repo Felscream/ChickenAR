@@ -30,7 +30,7 @@ namespace Building
             }
         }
 
-        protected override void CreateGrid()
+        public override void CreateGrid()
         {
             _grid = new Tile[_gridSizeX, _gridSizeY];
             Vector3 worldBottomLeft = transform.position - Vector3.right * GridWorldSize.x / 2 - Vector3.forward * GridWorldSize.y / 2;

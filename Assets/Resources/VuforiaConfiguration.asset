@@ -21,7 +21,7 @@ MonoBehaviour:
     maxSimultaneousObjectTargets: 1
     useDelayedLoadingObjectTargets: 0
     cameraDirection: 0
-    mirrorVideoBackground: 1
+    mirrorVideoBackground: 0
     version: 7.5.26
     eulaAcceptedVersions: '{"Values":["7.5"]}'
   digitalEyewear:

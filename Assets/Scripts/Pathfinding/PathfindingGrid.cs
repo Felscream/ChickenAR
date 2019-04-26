@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WorldGenerator;
 
 namespace Pathfinding {
     public class PathfindingGrid : BasicGrid<Node>
     {
         public LayerMask UnwalkableLayer;
-
         public int MaxSize
         {
             get
@@ -55,13 +55,31 @@ namespace Pathfinding {
 
         public void RefreshGrid()
         {
-            CreateGrid();
+            if(_grid != null)
+            {
+                for (int x = 0; x < _gridSizeX; ++x)
+                {
+                    for (int y = 0; y < _gridSizeY; ++y)
+                    {
+                        Node n = _grid[x, y];
+                        bool walkable = !Physics.CheckSphere(n.WorldPosition, NodeRadius, UnwalkableLayer);
+                        _grid[x, y].IsWalkable = walkable;
+                    }
+                }
+            }
         }
 
-        protected override void CreateGrid() {
+        public void UpdateNode(TerrainTile tile)
+        {
+            bool highElevation = false;
+            bool walkable = tile.Type != TileType.Water;
+            _grid[tile.X, tile.Y].IsWalkable = walkable;
+        }
+
+        public override void CreateGrid() {
             _grid = new Node[_gridSizeX, _gridSizeY];
             Vector3 worldBottomLeft = transform.position - Vector3.right * GridWorldSize.x / 2 - Vector3.forward * GridWorldSize.y / 2;
-            for(int x = 0; x < _gridSizeX; ++x)
+            for (int x = 0; x < _gridSizeX; ++x)
             {
                 for (int y = 0; y < _gridSizeY; ++y) {
                     Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * _nodeDiameter + NodeRadius) + Vector3.forward * (y * _nodeDiameter + NodeRadius);
