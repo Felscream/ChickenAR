@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8303096105513415021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8303096105513415008}
+  - component: {fileID: 8303096105513415022}
+  - component: {fileID: 8303096105513415023}
+  m_Layer: 9
+  m_Name: TerrainGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8303096105513415008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303096105513415021}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8303096105513415022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303096105513415021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c512b143530a3af45b2eb4ecf33c71af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dimensions: {x: 40, y: 40}
+  PathfindingGrid: {fileID: 0}
+  TileRadius: 0.5
+  WorldBottom: -1
+  Seed: 0
+  UseFixedSeed: 0
+  TilePrefabs:
+  - Type: 0
+    Tile: {fileID: 1922742637, guid: bbdcb7ea1ee514b46acd207c0dd0ec94, type: 3}
+  - Type: 5
+    Tile: {fileID: 1416425296, guid: a4f9cd9840404c845a9461ab30e4b0dd, type: 3}
+  - Type: 4
+    Tile: {fileID: 1962071638, guid: facb408dabea4774f810936e9cc75100, type: 3}
+  - Type: 2
+    Tile: {fileID: 1180641870, guid: 6df0ba8b514bdba4ea70d803dd5d2520, type: 3}
+  - Type: 4
+    Tile: {fileID: 1234408215, guid: bd93237680f63fb46b266ce0218f3838, type: 3}
+  - Type: 7
+    Tile: {fileID: 978806638, guid: d0ea8e2007785e84cadf47022a292ff5, type: 3}
+  - Type: 3
+    Tile: {fileID: 2076162260, guid: a048faef8d09c874abe94abdb91bdf19, type: 3}
+  - Type: 1
+    Tile: {fileID: 1450054234, guid: a62f51698fb54164586464009699a4b1, type: 3}
+  - Type: 8
+    Tile: {fileID: 467363205, guid: 4d51af74a0640364faddc6d63ea9701e, type: 3}
+  MudToGrassProbability: 0.4
+  JitterProbability: 0.5
+  chunkSizeMin: 400
+  chunkSizeMax: 600
+  landPercentage: 75
+  highRiseProbability: 0.3
+  SinkProbability: 0.3
+  CaveProbability: 0.1
+--- !u!114 &8303096105513415023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303096105513415021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6998605e8acaca94b9ae1a1a0747503c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Frequency: 0.05
+  Amplitude: 0.4
+  XOffset: 0.4
+  YOffset: 6

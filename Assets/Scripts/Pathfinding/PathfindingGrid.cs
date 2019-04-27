@@ -29,6 +29,11 @@ namespace Pathfinding {
             }
         }
 
+        protected override void Awake()
+        {
+            
+        }
+
         public Node GetNode(int x, int y)
         {
             return _grid[x, y];
@@ -71,9 +76,15 @@ namespace Pathfinding {
 
         public void UpdateNode(TerrainTile tile)
         {
-            bool highElevation = false;
             bool walkable = tile.Type != TileType.Water;
-            _grid[tile.X, tile.Y].IsWalkable = walkable;
+            
+            if (_grid == null)
+            {
+                Debug.LogError("Grid not generated yet", gameObject);
+            }
+            Node nodeToUpdate = _grid[tile.X, tile.Y];
+            nodeToUpdate.IsWalkable = walkable;
+            nodeToUpdate.WorldPosition = new Vector3(nodeToUpdate.WorldPosition.x, tile.transform.localPosition.y + tile.PivotOffset.y * 2, nodeToUpdate.WorldPosition.z);
         }
 
         public override void CreateGrid() {

@@ -112,85 +112,13 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &162310597
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 162310600}
-  - component: {fileID: 162310598}
-  m_Layer: 9
-  m_Name: Terrain
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &162310598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162310597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c512b143530a3af45b2eb4ecf33c71af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Dimensions: {x: 40, y: 40}
-  PathfindingGrid: {fileID: 1865352052}
-  TileRadius: 0.5
-  TilePrefabs:
-  - Type: 0
-    Tile: {fileID: 1922742637, guid: bbdcb7ea1ee514b46acd207c0dd0ec94, type: 3}
-  - Type: 5
-    Tile: {fileID: 1416425296, guid: a4f9cd9840404c845a9461ab30e4b0dd, type: 3}
-  - Type: 4
-    Tile: {fileID: 1962071638, guid: facb408dabea4774f810936e9cc75100, type: 3}
-  - Type: 2
-    Tile: {fileID: 1180641870, guid: 6df0ba8b514bdba4ea70d803dd5d2520, type: 3}
-  - Type: 4
-    Tile: {fileID: 1234408215, guid: bd93237680f63fb46b266ce0218f3838, type: 3}
-  - Type: 7
-    Tile: {fileID: 978806638, guid: d0ea8e2007785e84cadf47022a292ff5, type: 3}
-  - Type: 3
-    Tile: {fileID: 2076162260, guid: a048faef8d09c874abe94abdb91bdf19, type: 3}
-  - Type: 1
-    Tile: {fileID: 1450054234, guid: a62f51698fb54164586464009699a4b1, type: 3}
-  - Type: 8
-    Tile: {fileID: 467363205, guid: 4d51af74a0640364faddc6d63ea9701e, type: 3}
-  MudToGrassProbability: 0.4
-  JitterProbability: 0.5
-  chunkSizeMin: 400
-  chunkSizeMax: 700
-  landPercentage: 80
-  highRiseProbability: 0.3
-  SinkProbability: 0.2
---- !u!4 &162310600
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162310597}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &176327322
+--- !u!43 &33878373
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ImageTargetMesh-3090038
+  m_Name: ImageTargetMesh21500
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -344,6 +272,82 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &162310597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 162310600}
+  - component: {fileID: 162310598}
+  m_Layer: 9
+  m_Name: Terrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &162310598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162310597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c512b143530a3af45b2eb4ecf33c71af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dimensions: {x: 40, y: 40}
+  PathfindingGrid: {fileID: 1865352052}
+  TileRadius: 0.5
+  WorldBottom: -1
+  Seed: 0
+  UseFixedSeed: 0
+  TilePrefabs:
+  - Type: 0
+    Tile: {fileID: 1922742637, guid: bbdcb7ea1ee514b46acd207c0dd0ec94, type: 3}
+  - Type: 5
+    Tile: {fileID: 1416425296, guid: a4f9cd9840404c845a9461ab30e4b0dd, type: 3}
+  - Type: 4
+    Tile: {fileID: 1962071638, guid: facb408dabea4774f810936e9cc75100, type: 3}
+  - Type: 2
+    Tile: {fileID: 1180641870, guid: 6df0ba8b514bdba4ea70d803dd5d2520, type: 3}
+  - Type: 4
+    Tile: {fileID: 1234408215, guid: bd93237680f63fb46b266ce0218f3838, type: 3}
+  - Type: 7
+    Tile: {fileID: 978806638, guid: d0ea8e2007785e84cadf47022a292ff5, type: 3}
+  - Type: 3
+    Tile: {fileID: 2076162260, guid: a048faef8d09c874abe94abdb91bdf19, type: 3}
+  - Type: 1
+    Tile: {fileID: 1450054234, guid: a62f51698fb54164586464009699a4b1, type: 3}
+  - Type: 8
+    Tile: {fileID: 467363205, guid: 4d51af74a0640364faddc6d63ea9701e, type: 3}
+  MudToGrassProbability: 0.4
+  JitterProbability: 0.5
+  chunkSizeMin: 400
+  chunkSizeMax: 600
+  landPercentage: 75
+  highRiseProbability: 0.3
+  SinkProbability: 0.3
+  CaveProbability: 0.1
+--- !u!4 &162310600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162310597}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &248762953
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +486,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736524278}
-  m_Mesh: {fileID: 176327322}
+  m_Mesh: {fileID: 33878373}
 --- !u!23 &736524280
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -500,7 +504,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1950041610}
+  - {fileID: 783961540}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -572,11 +576,84 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736524278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &783961540
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'niwatoriARTargetMaterial
+
+    21510'
+  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 3afb1655129d41939a8cfe192935f555, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors:
+    - _Color: {r: 0.82089555, g: 0.82089555, b: 0.82089555, a: 1}
+--- !u!1 &1652657340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1652657342}
+  - component: {fileID: 1652657341}
+  m_Layer: 0
+  m_Name: WorldGeneratorController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1652657341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652657340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74c144e61b214d49a1e6fe13f839e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _terrainGrid: {fileID: 162310598}
+  _pathfindingGrid: {fileID: 1865352052}
+--- !u!4 &1652657342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652657340}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.469448, y: 19.38417, z: 16.904623}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1865352049
 GameObject:
@@ -653,31 +730,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &1950041610
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'niwatoriARTargetMaterial
-
-    -3090042'
-  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 3afb1655129d41939a8cfe192935f555, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors:
-    - _Color: {r: 0.82089555, g: 0.82089555, b: 0.82089555, a: 1}

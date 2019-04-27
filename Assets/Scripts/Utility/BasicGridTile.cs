@@ -8,7 +8,10 @@ public class BasicGridTile
     protected int _gridX;
     protected int _gridY;
 
-    public Vector3 WorldPosition { get { return _worldPosition; } }
+    public Vector3 WorldPosition {
+        get { return _worldPosition; }
+        set { _worldPosition = value; }
+    }
     public int GridX { get { return _gridX; } }
     public int GridY { get { return _gridY; } }
 

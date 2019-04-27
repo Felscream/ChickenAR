@@ -5,6 +5,7 @@ using UnityEngine;
 public static class WorldConstants
 {
     public static int MaxElevation = 4;
+    public static int MinimumElevation = 2;
     public static float ElevationStep = 1f;
     public enum NeighbourDirection
     {

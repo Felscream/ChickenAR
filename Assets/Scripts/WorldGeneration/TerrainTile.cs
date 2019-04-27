@@ -8,13 +8,14 @@ namespace WorldGenerator
     {
         public Vector3 PivotOffset = new Vector3(-0.5f, 0.5f, 0.5f);
         public TerrainTile[] Neighbours = new TerrainTile[8];
-
         public TileType Type;
         private int _x, _y;
         private float _elevation = 0f;
+
         public int X { get { return _x; } }
         public int Y { get { return _y; } }
         public int Distance { get; set; }
+        public Vector3 FixedLocalPosition { get; set; }
         public float Elevation
         {
             get { return _elevation; }
@@ -22,6 +23,7 @@ namespace WorldGenerator
             {
                 _elevation = Mathf.Min(value, WorldConstants.MaxElevation);
                 transform.localPosition = new Vector3(transform.localPosition.x, _elevation / 2f - PivotOffset.y, transform.localPosition.z);
+                FixedLocalPosition = transform.localPosition;
             }
         }
 

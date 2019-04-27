@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using System.Diagnostics;
 
 namespace WorldGenerator
 {
@@ -10,8 +11,12 @@ namespace WorldGenerator
     {
         public Vector2 Dimensions;
         public PathfindingGrid PathfindingGrid;
-
         public float TileRadius = 0.5f;
+        public float WorldBottom = -1f;
+
+        public int Seed;
+        public bool UseFixedSeed;
+
         public TileTypeData[] TilePrefabs;
         [Range(0, 1)] public float MudToGrassProbability = 0.4f;
         [Range(0f, 0.5f)] public float JitterProbability = 0.25f;
@@ -20,20 +25,23 @@ namespace WorldGenerator
         [Range(5, 95)] public int landPercentage = 50;
         [Range(0f, 1f)] public float highRiseProbability = 0.25f;
         [Range(0f, 0.4f)] public float SinkProbability = 0.25f;
+        [Range(0f, 1f)] public float CaveProbability = 0.25f;
         private TerrainTile[,] _grid;
         private float _tileDiameter;
         private int _gridSizeX, _gridSizeY;
         private TilePriorityQueue _searchFrontier;
         private int _searchFrontierPhase;
         private bool _worldGenerated = false;
-        private void Awake()
+
+        public void Initialize()
         {
-            _tileDiameter = 2 * TileRadius;
-            _gridSizeX = Mathf.RoundToInt(Dimensions.x / _tileDiameter);
-            _gridSizeY = Mathf.RoundToInt(Dimensions.y / _tileDiameter);
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            InitSeed();
+            
             CreateGrid();
 
-            if(_searchFrontier == null)
+            if (_searchFrontier == null)
             {
                 _searchFrontier = new TilePriorityQueue();
             }
@@ -41,13 +49,18 @@ namespace WorldGenerator
             CreateLand();
 
             SetTerrainType();
-            for(int i = 0; i < _gridSizeX; i++)
+            for (int i = 0; i < _gridSizeX; i++)
             {
-                for(int j = 0; j < _gridSizeY; j++)
+                for (int j = 0; j < _gridSizeY; j++)
                 {
                     _grid[i, j].SearchPhase = 0;
                 }
             }
+
+            FillSpace();
+
+            sw.Stop();
+            UnityEngine.Debug.Log("World generated in " + sw.ElapsedMilliseconds + " ms", gameObject);
         }
 
         public TerrainTile GetTile(int x, int y)
@@ -65,8 +78,30 @@ namespace WorldGenerator
             return _grid[x, y];
         }
 
+        public List<TerrainTile> GetTilesByType(TileType type)
+        {
+            List<TerrainTile> tiles = new List<TerrainTile>();
+            if(_grid != null)
+            {
+                for (int i = 0; i < _gridSizeX; i++)
+                {
+                    for (int j = 0; j < _gridSizeY; j++)
+                    {
+                        if (_grid[i, j].Type == type)
+                        {
+                            tiles.Add(_grid[i, j]);
+                        }
+                    }
+                }
+            }
+            return tiles;
+        }
+
         protected virtual void CreateGrid()
         {
+            _tileDiameter = 2 * TileRadius;
+            _gridSizeX = Mathf.RoundToInt(Dimensions.x / _tileDiameter);
+            _gridSizeY = Mathf.RoundToInt(Dimensions.y / _tileDiameter);
             _grid = new TerrainTile[_gridSizeX, _gridSizeY];
             Vector3 bottomLeft = transform.position - Vector3.right * Dimensions.x / 2 - Vector3.forward * Dimensions.y / 2;
             for (int y = 0; y < _gridSizeY; y++)
@@ -104,6 +139,7 @@ namespace WorldGenerator
             Vector3 position = reference + Vector3.right * (x * _tileDiameter + TileRadius) + Vector3.forward * (y * _tileDiameter + TileRadius);
             tile.transform.SetParent(transform, false);
             tile.transform.localPosition = position - tile.PivotOffset;
+            tile.FixedLocalPosition = tile.transform.localPosition;
             tile.transform.localScale *= _tileDiameter;
             tile.SetCoordinates(x, y);
             tile.Neighbours = new TerrainTile[8];
@@ -208,7 +244,12 @@ namespace WorldGenerator
             {
                 TerrainTile current = _searchFrontier.Dequeue();
                 float originalElevation = current.Elevation;
-                current.Elevation = originalElevation + rise;
+                float newElevation = originalElevation + rise;
+
+                if (newElevation > WorldConstants.MaxElevation)
+                    continue;
+                current.Elevation = newElevation;
+
                 if (originalElevation < (int)TileType.Mud &&
                     current.Elevation >= (int)TileType.Mud && --budget == 0)
                 {
@@ -248,7 +289,12 @@ namespace WorldGenerator
             {
                 TerrainTile current = _searchFrontier.Dequeue();
                 float originalElevation = current.Elevation;
-                current.Elevation = originalElevation - sink;
+
+                float newElevation = originalElevation - sink;
+                if (newElevation > WorldConstants.MaxElevation)
+                    continue;
+                current.Elevation = newElevation;
+
                 if (originalElevation >= (int)TileType.Mud &&
                     current.Elevation < (int)TileType.Mud)
                 {
@@ -295,7 +341,48 @@ namespace WorldGenerator
                 for(int j = 0; j < _gridSizeY; j++)
                 {
                     TerrainTile tile = _grid[i, j];
+                    TerrainTile fillerTileType;
+                    switch (tile.Type)
+                    {
+                        case TileType.Grass:
+                            fillerTileType = GetPrefabByType(TileType.Mud);
+                            break;
+                        case TileType.Rock:
+                        case TileType.Snow:
+                            fillerTileType = GetPrefabByType(TileType.Rock);
+                            break;
+                        default:
+                            fillerTileType = GetPrefabByType(TileType.Water);
+                            break;
 
+                    }
+                    float dist = Mathf.Abs(WorldBottom - tile.transform.localPosition.y);
+                    float yPos = 0f;
+                    do
+                    {
+                        yPos += 1f;
+                        bool instantiteTile = true;
+                        if(yPos >= dist)
+                        {
+                            fillerTileType = GetPrefabByType(TileType.Water);
+                        }
+                        if (tile.Type != TileType.Water && yPos < dist)
+                        {
+                            if (UnityEngine.Random.value < CaveProbability)
+                            {
+                                instantiteTile = false;
+                            }
+                        }
+
+                        if(instantiteTile) {
+                            TerrainTile filler = Instantiate(fillerTileType);
+                            filler.transform.SetParent(tile.transform, false);
+                            filler.transform.localPosition = -Vector3.up * yPos;
+                            filler.FixedLocalPosition = filler.transform.localPosition;
+                        }
+                        
+                    }
+                    while (yPos < dist);
                 }
             }
         }
@@ -308,6 +395,20 @@ namespace WorldGenerator
         private TerrainTile GetPrefabByType(TileType t)
         {
             return Array.Find(TilePrefabs, f => f.Type == t).Tile;
+        }
+
+        private void InitSeed()
+        {
+            UnityEngine.Random.State originalRandomState = UnityEngine.Random.state;
+            if (!UseFixedSeed)
+            {
+                Seed = UnityEngine.Random.Range(0, int.MaxValue);
+                Seed ^= (int)System.DateTime.Now.Ticks;
+                Seed ^= (int)Time.unscaledTime;
+                Seed &= int.MaxValue;
+            }
+            
+            UnityEngine.Random.InitState(Seed);
         }
     }
 }
