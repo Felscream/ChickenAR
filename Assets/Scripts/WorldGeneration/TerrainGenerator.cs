@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace WorldGenerator
 {
+    [RequireComponent(typeof(TileFeatureManager))]
     public class TerrainGenerator : MonoBehaviour
     {
         public Vector2 Dimensions;
@@ -33,8 +34,13 @@ namespace WorldGenerator
         private int _searchFrontierPhase;
         private bool _worldGenerated = false;
 
+        private TileFeatureManager _features;
+
         public void Initialize()
         {
+            _features = GetComponent<TileFeatureManager>();
+            _features.InitializeHashGrid(Seed);
+
             Stopwatch sw = new Stopwatch();
             sw.Start();
             InitSeed();
@@ -58,7 +64,7 @@ namespace WorldGenerator
             }
 
             FillSpace();
-
+            Triangulate();
             sw.Stop();
             UnityEngine.Debug.Log("World generated in " + sw.ElapsedMilliseconds + " ms", gameObject);
         }
@@ -95,6 +101,39 @@ namespace WorldGenerator
                 }
             }
             return tiles;
+        }
+
+        public void Triangulate()
+        {
+            _features.Clear();
+            for(int i = 0; i < _gridSizeX; i++)
+            {
+                for(int j = 0; j < _gridSizeY; j++)
+                {
+                    Triangulate(_grid[i, j]);
+                }
+            }
+            _features.Apply();
+        }
+
+        private void Triangulate(TerrainTile tile)
+        {
+            for(WorldConstants.NeighbourDirection d = WorldConstants.NeighbourDirection.TopLeft; d <= WorldConstants.NeighbourDirection.Right; d++)
+            {
+                Triangulate(d, tile);
+            }
+
+            if(tile.Elevation >= (int)TileType.Mud && !tile.HasFeature)
+            {
+                _features.AddFeature(tile, tile.TileTopCenter);
+            }
+
+            PathfindingGrid.UpdateNode(tile);
+        }
+
+        void Triangulate(WorldConstants.NeighbourDirection direction, TerrainTile tile)
+        {
+            Vector3 center = tile.TileTopCenter;
         }
 
         protected virtual void CreateGrid()
@@ -145,7 +184,6 @@ namespace WorldGenerator
             tile.Neighbours = new TerrainTile[8];
 
             ComputeTileNeighbours(tile, x, y);
-            PathfindingGrid.UpdateNode(tile);
         }
 
         private void ComputeTileNeighbours(TerrainTile tile, int x = 0, int y = 0)

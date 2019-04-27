@@ -76,7 +76,7 @@ namespace Pathfinding {
 
         public void UpdateNode(TerrainTile tile)
         {
-            bool walkable = tile.Type != TileType.Water;
+            bool walkable = tile.Type != TileType.Water && !tile.HasFeature;
             
             if (_grid == null)
             {
@@ -84,7 +84,8 @@ namespace Pathfinding {
             }
             Node nodeToUpdate = _grid[tile.X, tile.Y];
             nodeToUpdate.IsWalkable = walkable;
-            nodeToUpdate.WorldPosition = new Vector3(nodeToUpdate.WorldPosition.x, tile.transform.localPosition.y + tile.PivotOffset.y * 2, nodeToUpdate.WorldPosition.z);
+            nodeToUpdate.Elevation = tile.transform.localPosition.y + tile.PivotOffset.y * 2;
+            nodeToUpdate.WorldPosition = new Vector3(nodeToUpdate.WorldPosition.x, nodeToUpdate.Elevation, nodeToUpdate.WorldPosition.z);
         }
 
         public override void CreateGrid() {

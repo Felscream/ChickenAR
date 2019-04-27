@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8303096105513415008}
   - component: {fileID: 8303096105513415022}
   - component: {fileID: 8303096105513415023}
+  - component: {fileID: 162310601}
   m_Layer: 9
   m_Name: TerrainGenerator
   m_TagString: Untagged
@@ -93,3 +94,17 @@ MonoBehaviour:
   Amplitude: 0.4
   XOffset: 0.4
   YOffset: 6
+--- !u!114 &162310601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303096105513415021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b98186af1a500a46a812931343a4f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FeaturePrefab: {fileID: 400008, guid: 6a2260fbe06bfd844ba2272d591de877, type: 3}
+  NoiseTexture: {fileID: 2800000, guid: f911b8b71246d1b4da6be90581a73ed5, type: 3}

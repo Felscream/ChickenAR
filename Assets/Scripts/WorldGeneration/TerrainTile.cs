@@ -4,9 +4,23 @@ using UnityEngine;
 
 namespace WorldGenerator
 {
+    public struct TileHash
+    {
+        public float a, b;
+
+        public static TileHash Create()
+        {
+            TileHash hash;
+            hash.a = Random.value;
+            hash.b = Random.value;
+            return hash;
+        }
+    }
+
     public class TerrainTile : MonoBehaviour
     {
         public Vector3 PivotOffset = new Vector3(-0.5f, 0.5f, 0.5f);
+        [Range(0f,1f)] public float FeatureProbability;
         public TerrainTile[] Neighbours = new TerrainTile[8];
         public TileType Type;
         private int _x, _y;
@@ -16,6 +30,14 @@ namespace WorldGenerator
         public int Y { get { return _y; } }
         public int Distance { get; set; }
         public Vector3 FixedLocalPosition { get; set; }
+        public bool HasFeature { get; set; }
+        public Vector3 TileTopCenter
+        {
+            get
+            {
+                return transform.localPosition + Vector3.up * PivotOffset.y + PivotOffset;
+            }
+        }
         public float Elevation
         {
             get { return _elevation; }

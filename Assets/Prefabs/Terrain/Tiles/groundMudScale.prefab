@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PivotOffset: {x: -0.5, y: 0.5, z: 0.5}
+  FeatureProbability: 0.1
   Neighbours:
   - {fileID: 0}
   - {fileID: 0}

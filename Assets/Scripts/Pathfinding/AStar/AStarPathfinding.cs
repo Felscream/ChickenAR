@@ -109,11 +109,11 @@ namespace Pathfinding {
         Vector3[] SimplifyPath(List<Node> path)
         {
             List<Vector3> waypoints = new List<Vector3>();
-            Vector2 directionOld = Vector2.zero;
+            Vector3 directionOld = Vector3.zero;
 
             for(int i = 0; i < path.Count - 1; i++)
             {
-                Vector2 directionNew = new Vector2(path[i].GridX - path[i + 1].GridX, path[i].GridY - path[i+1].GridY);
+                Vector3 directionNew = new Vector3(path[i].GridX - path[i + 1].GridX, path[i].Elevation - path[i+1].Elevation, path[i].GridY - path[i+1].GridY);
                 if(directionNew != directionOld)
                 {
                     waypoints.Add(path[i].WorldPosition);

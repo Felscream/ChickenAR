@@ -11,7 +11,7 @@ namespace Pathfinding{
         public int GCost;
         public int HCost;
         public Node Parent;
-
+        public float Elevation;
         public int FCost { get { return GCost + HCost; } }
 
         public int HeapIndex { get; set; }

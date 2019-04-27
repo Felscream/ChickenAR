@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WorldGenerator;
 
-[RequireComponent(typeof(Terrain))]
+[RequireComponent(typeof(TerrainGenerator))]
 public class WorldBoundary : MonoBehaviour
 {
     private static WorldBoundary _instance;
 
     public static Vector3[] Boundaries { get; private set; }
 
-    private Terrain _terrain;
+    private TerrainGenerator _terrainGenerator;
 
     private void Awake()
     {
@@ -28,8 +29,8 @@ public class WorldBoundary : MonoBehaviour
     private void ComputeBoundaries()
     {
         Boundaries = new Vector3[2];
-        _terrain = GetComponent<Terrain>();
-        Boundaries[0] = transform.position;
-        Boundaries[1] = transform.position + _terrain.terrainData.size;
+        _terrainGenerator = GetComponent<TerrainGenerator>();
+        Boundaries[0] = transform.position - Vector3.right * _terrainGenerator.Dimensions.x / 2f;
+        Boundaries[1] = transform.position + Vector3.forward * _terrainGenerator.Dimensions.y / 2f;
     }
 }
