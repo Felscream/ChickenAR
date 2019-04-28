@@ -19,6 +19,9 @@ namespace WorldGenerator
 
     public class TerrainTile : MonoBehaviour
     {
+        public delegate void HoverBehaviour(TerrainTile tile);
+        public event HoverBehaviour Glow;
+
         public Vector3 PivotOffset = new Vector3(-0.5f, 0.5f, 0.5f);
         [Range(0f,1f)] public float FeatureProbability;
         public TerrainTile[] Neighbours = new TerrainTile[8];
@@ -26,11 +29,31 @@ namespace WorldGenerator
         private int _x, _y;
         private float _elevation = 0f;
 
+        private Renderer _renderer;
+        private MaterialPropertyBlock _materialProperty;
+
         public int X { get { return _x; } }
         public int Y { get { return _y; } }
         public int Distance { get; set; }
+        public bool IsHovered { get; set; }
         public Vector3 FixedLocalPosition { get; set; }
         public bool HasFeature { get; set; }
+
+        public Renderer Renderer {
+            get {
+                if (_renderer == null)
+                {
+                    _renderer = GetComponent<Renderer>();
+                }
+                return _renderer;
+            }
+        }
+
+        public MaterialPropertyBlock MaterialProperty
+        {
+            get { return _materialProperty; }
+        }
+
         public Vector3 TileTopCenter
         {
             get
@@ -61,6 +84,19 @@ namespace WorldGenerator
         public int SearchPhase { get; set; }
 
         public TerrainTile NextWithSamePriority { get; set; }
+
+        private void Start()
+        {
+            _materialProperty = new MaterialPropertyBlock();    
+        }
+
+        private void LateUpdate()
+        {
+            if(Glow != null)
+            {
+                Glow(this);
+            }
+        }
 
         public void SetCoordinates(int x, int y)
         {

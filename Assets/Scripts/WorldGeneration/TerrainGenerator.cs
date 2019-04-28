@@ -36,6 +36,8 @@ namespace WorldGenerator
 
         private TileFeatureManager _features;
 
+        public TerrainTile[,] Grid { get { return _grid; } }
+
         public void Initialize()
         {
             _features = GetComponent<TileFeatureManager>();
