@@ -21,7 +21,7 @@ public class ChickenLocomotion : Unit
 
     private void DestinationFound(Vector3 destination)
     {
-        PathRequestManager.RequestPath(transform.position, destination, OnPathFound);
+        PathRequestManager.RequestPath(new PathRequest(transform.position, destination, OnPathFound));
     }
 
     private void OnDisable()

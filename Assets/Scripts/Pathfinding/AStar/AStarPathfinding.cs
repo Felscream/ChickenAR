@@ -9,7 +9,6 @@ namespace Pathfinding {
     public class AStarPathfinding : MonoBehaviour
     {
         private PathfindingGrid _grid;
-        private PathRequestManager _requestManager;
 
         private void Awake()
         {
@@ -20,17 +19,7 @@ namespace Pathfinding {
             }
         }
 
-        private void Start()
-        {
-            _requestManager = PathRequestManager.Instance;
-        }
-
-        public void StartFindPath(Vector3 startPos, Vector3 target)
-        {
-            StartCoroutine(FindPath(startPos, target));
-        }
-
-        private IEnumerator FindPath(Vector3 startPosition, Vector3 targetPosition)
+        public void FindPath(PathRequest request, Action<PathResult> callback)
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -38,8 +27,8 @@ namespace Pathfinding {
             Vector3[] waypoints = new Vector3[0];
             bool pathSucces = false;
 
-            Node startNode = _grid.WorldPositionToNode(startPosition);
-            Node targetNode = _grid.WorldPositionToNode(targetPosition);
+            Node startNode = _grid.WorldPositionToNode(request.start);
+            Node targetNode = _grid.WorldPositionToNode(request.end);
 
             if(startNode.IsWalkable && targetNode.IsWalkable)
             {
@@ -83,17 +72,16 @@ namespace Pathfinding {
                     }
                 }
             }
-
-            yield return null;
+            
             if (pathSucces)
             {
                 waypoints = RetracePath(startNode, targetNode);
             }
 
-            _requestManager.FinishedProcessingPath(waypoints, pathSucces);
+            callback(new PathResult(waypoints, pathSucces, request.callback));
         }
 
-        Vector3[] RetracePath(Node startNode, Node endNode) {
+        private Vector3[] RetracePath(Node startNode, Node endNode) {
             List<Node> path = new List<Node>();
             Node currentNode = endNode;
 
@@ -106,7 +94,7 @@ namespace Pathfinding {
             return waypoints;
         }
 
-        Vector3[] SimplifyPath(List<Node> path)
+        private Vector3[] SimplifyPath(List<Node> path)
         {
             List<Vector3> waypoints = new List<Vector3>();
             Vector3 directionOld = Vector3.zero;

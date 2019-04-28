@@ -830,7 +830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridWorldSize: {x: 40, y: 40}
   NodeRadius: 0.5
-  DisplayGrid: 1
+  DisplayGrid: 0
   ObstacleLayer:
     serializedVersion: 2
     m_Bits: 512

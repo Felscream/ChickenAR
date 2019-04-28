@@ -1,33 +1,44 @@
 ﻿using System;
+using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
+public struct PathRequest
+{
+    public Vector3 start;
+    public Vector3 end;
+    public Action<Vector3[], bool> callback;
+
+    public PathRequest(Vector3 s, Vector3 e, Action<Vector3[], bool> call)
+    {
+        start = s;
+        end = e;
+        callback = call;
+    }
+}
+
+public struct PathResult
+{
+    public Vector3[] path;
+    public bool success;
+    public Action<Vector3[], bool> callback;
+
+    public PathResult(Vector3[] path, bool success, Action<Vector3[], bool> callback)
+    {
+        this.path = path;
+        this.success = success;
+        this.callback = callback;
+    }
+}
+
 [RequireComponent(typeof(AStarPathfinding))]
 public class PathRequestManager : MonoBehaviour
 {
-    struct PathRequest
-    {
-        public Vector3 start;
-        public Vector3 end;
-        public Action<Vector3[], bool> callback;
-
-        public PathRequest(Vector3 s, Vector3 e, Action<Vector3[], bool> call)
-        {
-            start = s;
-            end = e;
-            callback = call;
-        }
-    }
-
-    private Queue<PathRequest> _pathRequestQueue = new Queue<PathRequest>();
-    private PathRequest _currentPathRequest;
     private AStarPathfinding _pathfinding;
-
+    private Queue<PathResult> _resultQueue;
     private PathfindingGrid _grid;
-
-    private bool _isProcessingPath;
 
     private static PathRequestManager _instance;
 
@@ -37,7 +48,7 @@ public class PathRequestManager : MonoBehaviour
         {
             if (_instance == null)
             {
-                Debug.LogError("No instance of X360_InputManager");
+                Debug.LogError("No instance of PathRequestManager");
             }
             return _instance;
         }
@@ -56,30 +67,42 @@ public class PathRequestManager : MonoBehaviour
 
         _pathfinding = GetComponent<AStarPathfinding>();
         _grid = GetComponent<PathfindingGrid>();
+        _resultQueue = new Queue<PathResult>();
     }
 
-    public static void RequestPath(Vector3 start, Vector3 target, Action<Vector3[], bool> callback)
+    private void Update()
     {
-        PathRequest newRequest = new PathRequest(start, target, callback);
-        _instance._pathRequestQueue.Enqueue(newRequest);
-        _instance.TryProcessNextRequest();
-    }
-
-    public void TryProcessNextRequest()
-    {
-        if (!_isProcessingPath && _pathRequestQueue.Count > 0)
+        if(_resultQueue.Count > 0)
         {
-            _currentPathRequest = _pathRequestQueue.Dequeue();
-            _isProcessingPath = true;
-            _pathfinding.StartFindPath(_currentPathRequest.start, _currentPathRequest.end);
+            int itemsCount = _resultQueue.Count;
+            lock (_resultQueue)
+            {
+                for(int i = 0; i < itemsCount; i++)
+                {
+                    PathResult result = _resultQueue.Dequeue();
+                    result.callback(result.path, result.success);
+                }
+            }
         }
     }
 
-    public void FinishedProcessingPath(Vector3[] path, bool success)
+    public static void RequestPath(PathRequest request)
     {
-        _currentPathRequest.callback(path, success);
-        _isProcessingPath = false;
-        TryProcessNextRequest();
+        ThreadStart threadStart = delegate
+        {
+            _instance._pathfinding.FindPath(request, _instance.FinishedProcessingPath);
+        };
+
+        threadStart.Invoke();
+    }
+
+    public void FinishedProcessingPath(PathResult result)
+    {
+        lock (_resultQueue)
+        {
+            _resultQueue.Enqueue(result);
+        }
+        
     }
 
     public static Node GetNode(Vector3 position)

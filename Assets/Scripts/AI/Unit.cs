@@ -34,7 +34,7 @@ public class Unit : MonoBehaviour
 
     protected virtual void Start()
     {
-        PathRequestManager.RequestPath(transform.position, Target.position, OnPathFound);
+        PathRequestManager.RequestPath(new PathRequest(transform.position, Target.position, OnPathFound));
     }
 
     protected void OnPathFound(Vector3[] newPath, bool success)
