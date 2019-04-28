@@ -747,6 +747,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TerrainGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 8303096105513415022, guid: 7a67d91c390fa2f4db963a536772deda,
+        type: 3}
+      propertyPath: PathfindingGrid
+      value: 
+      objectReference: {fileID: 1865352052}
     - target: {fileID: 8303096105513415008, guid: 7a67d91c390fa2f4db963a536772deda,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -802,10 +807,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8303096105513415022, guid: 7a67d91c390fa2f4db963a536772deda,
-        type: 3}
-      propertyPath: PathfindingGrid
-      value: 
-      objectReference: {fileID: 1865352052}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a67d91c390fa2f4db963a536772deda, type: 3}

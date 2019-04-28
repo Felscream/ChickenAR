@@ -62,9 +62,9 @@ namespace Pathfinding {
         {
             if(_grid != null)
             {
-                for (int x = 0; x < _gridSizeX; ++x)
+                for (int y = 0; y < _gridSizeY; ++y)
                 {
-                    for (int y = 0; y < _gridSizeY; ++y)
+                    for (int x = 0; x < _gridSizeX; ++x)
                     {
                         Node n = _grid[x, y];
                         bool walkable = !Physics.CheckSphere(n.WorldPosition, NodeRadius, UnwalkableLayer);
@@ -91,12 +91,33 @@ namespace Pathfinding {
         public override void CreateGrid() {
             _grid = new Node[_gridSizeX, _gridSizeY];
             Vector3 worldBottomLeft = transform.position - Vector3.right * GridWorldSize.x / 2 - Vector3.forward * GridWorldSize.y / 2;
-            for (int x = 0; x < _gridSizeX; ++x)
+            for (int y = 0; y < _gridSizeY; ++y)
             {
-                for (int y = 0; y < _gridSizeY; ++y) {
+                for (int x = 0; x < _gridSizeX; ++x) { 
                     Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * _nodeDiameter + NodeRadius) + Vector3.forward * (y * _nodeDiameter + NodeRadius);
                     bool walkable = !Physics.CheckSphere(worldPoint, NodeRadius, UnwalkableLayer);
                     _grid[x, y] = new Node(walkable, worldPoint, x, y);
+                    ComputeNeighbours(_grid[x, y]);
+                }
+            }
+        }
+
+        private void ComputeNeighbours(Node node)
+        {
+            node.Neighbours = new Node[8];
+            if (node.GridX > 0)
+            {
+                node.SetNeighbour(NeighbourDirection.Left, _grid[node.GridX - 1, node.GridY]);
+            }
+            if (node.GridY > 0)
+            {
+                node.SetNeighbour(NeighbourDirection.Bottom, _grid[node.GridX, node.GridY - 1]);
+                if (node.GridX + 1 < _gridSizeX)
+                    node.SetNeighbour(NeighbourDirection.BottomRight, _grid[node.GridX + 1, node.GridY - 1]);
+
+                if (node.GridX > 0)
+                {
+                    node.SetNeighbour(NeighbourDirection.BottomLeft, _grid[node.GridX - 1, node.GridY - 1]);
                 }
             }
         }

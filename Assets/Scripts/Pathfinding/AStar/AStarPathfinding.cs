@@ -62,9 +62,9 @@ namespace Pathfinding {
                     }
 
 
-                    foreach (Node neighbour in _grid.GetNeighbours(current))
+                    foreach (Node neighbour in current.Neighbours)
                     {
-                        if (!neighbour.IsWalkable || closedSet.Contains(neighbour))
+                        if (neighbour == null || !neighbour.IsWalkable || closedSet.Contains(neighbour))
                             continue;
 
                         int newMovementCost = current.GCost + GetDistance(current, neighbour);

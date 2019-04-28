@@ -11,8 +11,11 @@ public class WaveEffect : MonoBehaviour
     public float Amplitude = 1f;
     public float XOffset = 0.4f;
     public float YOffset = 0.4f;
-    private TerrainGenerator _terraingGenerator;
+    
+    public TimeScaleManager _timeScale;
 
+    private TerrainGenerator _terraingGenerator;
+    private float _time = 1f;
     private List<TerrainTile> _waterTiles;
 
     private void Start()
@@ -21,11 +24,16 @@ public class WaveEffect : MonoBehaviour
         _waterTiles = _terraingGenerator.GetTilesByType(TileType.Water);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
+        if(_timeScale != null)
+        {
+            _time = _timeScale.Scale;
+        }
         for(int i = 0; i < _waterTiles.Count; i++)
         {
-            float y = Mathf.Sin(2f * Mathf.PI * Frequency * Time.time + 1.5f + _waterTiles[i].X * XOffset + _waterTiles[i].Y * YOffset) * Amplitude;
+
+            float y = Mathf.Sin(2f * Mathf.PI * Frequency * Time.time * _time + 1.5f + _waterTiles[i].X * XOffset + _waterTiles[i].Y * YOffset) * Amplitude;
             _waterTiles[i].transform.localPosition = _waterTiles[i].FixedLocalPosition + Vector3.up * y;
         }
     }

@@ -118,7 +118,7 @@ namespace WorldGenerator
 
         private void Triangulate(TerrainTile tile)
         {
-            for(WorldConstants.NeighbourDirection d = WorldConstants.NeighbourDirection.TopLeft; d <= WorldConstants.NeighbourDirection.Right; d++)
+            for(NeighbourDirection d = NeighbourDirection.TopLeft; d <= NeighbourDirection.Right; d++)
             {
                 Triangulate(d, tile);
             }
@@ -131,7 +131,7 @@ namespace WorldGenerator
             PathfindingGrid.UpdateNode(tile);
         }
 
-        void Triangulate(WorldConstants.NeighbourDirection direction, TerrainTile tile)
+        void Triangulate(NeighbourDirection direction, TerrainTile tile)
         {
             Vector3 center = tile.TileTopCenter;
         }
@@ -192,17 +192,17 @@ namespace WorldGenerator
             {
                 if (x > 0)
                 {
-                    tile.SetNeighbour(WorldConstants.NeighbourDirection.Left, _grid[x - 1, y]);
+                    tile.SetNeighbour(NeighbourDirection.Left, _grid[x - 1, y]);
                 }
                 if (y > 0)
                 {
-                    tile.SetNeighbour(WorldConstants.NeighbourDirection.Bottom, _grid[x, y - 1]);
+                    tile.SetNeighbour(NeighbourDirection.Bottom, _grid[x, y - 1]);
                     if (x + 1 < _gridSizeX)
-                        tile.SetNeighbour(WorldConstants.NeighbourDirection.BottomRight, _grid[x + 1, y - 1]);
+                        tile.SetNeighbour(NeighbourDirection.BottomRight, _grid[x + 1, y - 1]);
 
                     if (x > 0)
                     {
-                        tile.SetNeighbour(WorldConstants.NeighbourDirection.BottomLeft, _grid[x - 1, y - 1]);
+                        tile.SetNeighbour(NeighbourDirection.BottomLeft, _grid[x - 1, y - 1]);
                     }
                 }
             }
@@ -211,36 +211,36 @@ namespace WorldGenerator
                 
                 if (tile.X > 0)
                 {
-                    tile.SetNeighbour(WorldConstants.NeighbourDirection.Left, _grid[tile.X - 1, tile.Y]);
+                    tile.SetNeighbour(NeighbourDirection.Left, _grid[tile.X - 1, tile.Y]);
                     if (tile.X + 1 < _gridSizeX)
                     {
-                        tile.SetNeighbour(WorldConstants.NeighbourDirection.Right, _grid[tile.X + 1, tile.Y]);
+                        tile.SetNeighbour(NeighbourDirection.Right, _grid[tile.X + 1, tile.Y]);
                     }
                 }
 
                 if (tile.Y > 0)
                 {
-                    tile.SetNeighbour(WorldConstants.NeighbourDirection.Bottom, _grid[tile.X, tile.Y - 1]);
+                    tile.SetNeighbour(NeighbourDirection.Bottom, _grid[tile.X, tile.Y - 1]);
                     if (tile.X + 1 < _gridSizeX)
-                        tile.SetNeighbour(WorldConstants.NeighbourDirection.BottomRight, _grid[tile.X + 1, tile.Y - 1]);
+                        tile.SetNeighbour(NeighbourDirection.BottomRight, _grid[tile.X + 1, tile.Y - 1]);
 
                     if (tile.X > 0)
                     {
-                        tile.SetNeighbour(WorldConstants.NeighbourDirection.BottomLeft, _grid[tile.X - 1, tile.Y - 1]);
+                        tile.SetNeighbour(NeighbourDirection.BottomLeft, _grid[tile.X - 1, tile.Y - 1]);
                     }
                 }
 
                 if (tile.Y + 1 < _gridSizeY)
                 {
-                    tile.SetNeighbour(WorldConstants.NeighbourDirection.Top, _grid[tile.X, tile.Y + 1]);
+                    tile.SetNeighbour(NeighbourDirection.Top, _grid[tile.X, tile.Y + 1]);
                     if(tile.X + 1 > _gridSizeX)
                     {
-                        tile.SetNeighbour(WorldConstants.NeighbourDirection.TopRight, _grid[tile.X+1, tile.Y + 1]);
+                        tile.SetNeighbour(NeighbourDirection.TopRight, _grid[tile.X+1, tile.Y + 1]);
                     }
 
                     if (tile.X > 0)
                     {
-                        tile.SetNeighbour(WorldConstants.NeighbourDirection.TopLeft, _grid[tile.X - 1, tile.Y + 1]);
+                        tile.SetNeighbour(NeighbourDirection.TopLeft, _grid[tile.X - 1, tile.Y + 1]);
                     }
                 }
             }
@@ -296,7 +296,7 @@ namespace WorldGenerator
                 
                 size++;
 
-                for(WorldConstants.NeighbourDirection d = WorldConstants.NeighbourDirection.TopLeft; d <= WorldConstants.NeighbourDirection.Right; d++)
+                for(NeighbourDirection d = NeighbourDirection.TopLeft; d <= NeighbourDirection.Right; d++)
                 {
                     TerrainTile neighbour = current.GetNeighbour(d);
                     if(neighbour && neighbour.SearchPhase < _searchFrontierPhase)
@@ -341,7 +341,7 @@ namespace WorldGenerator
 
                 size++;
 
-                for (WorldConstants.NeighbourDirection d = WorldConstants.NeighbourDirection.TopLeft; d <= WorldConstants.NeighbourDirection.Right; d++)
+                for (NeighbourDirection d = NeighbourDirection.TopLeft; d <= NeighbourDirection.Right; d++)
                 {
                     TerrainTile neighbour = current.GetNeighbour(d);
                     if (neighbour && neighbour.SearchPhase < _searchFrontierPhase)

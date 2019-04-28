@@ -68,12 +68,12 @@ namespace WorldGenerator
             _y = y;
         }
 
-        public TerrainTile GetNeighbour(WorldConstants.NeighbourDirection direction)
+        public TerrainTile GetNeighbour(NeighbourDirection direction)
         {
             return Neighbours[(int)direction];
         }
 
-        public void SetNeighbour(WorldConstants.NeighbourDirection direction, TerrainTile tile)
+        public void SetNeighbour(NeighbourDirection direction, TerrainTile tile)
         {
             Neighbours[(int)direction] = tile;
             tile.Neighbours[(int)direction.Opposite()] = this;

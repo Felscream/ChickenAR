@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 19d37bddfd4fc824eb21b9a7ced51873, type: 3}
+  - {fileID: 2100000, guid: be029cdb80caae347bb704eac1db2357, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PivotOffset: {x: -0.5, y: 0.5, z: 0.5}
+  FeatureProbability: 0
   Neighbours:
   - {fileID: 0}
   - {fileID: 0}

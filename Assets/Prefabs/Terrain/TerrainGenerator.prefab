@@ -106,5 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b98186af1a500a46a812931343a4f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FeaturePrefab: {fileID: 400008, guid: 6a2260fbe06bfd844ba2272d591de877, type: 3}
+  FeaturePrefab: {fileID: 7042999347899770423, guid: 99fef8eb48837454cb79d4d1dd26d09f,
+    type: 3}
   NoiseTexture: {fileID: 2800000, guid: f911b8b71246d1b4da6be90581a73ed5, type: 3}

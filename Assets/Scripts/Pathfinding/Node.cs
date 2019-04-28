@@ -11,6 +11,7 @@ namespace Pathfinding{
         public int GCost;
         public int HCost;
         public Node Parent;
+        public Node[] Neighbours;
         public float Elevation;
         public int FCost { get { return GCost + HCost; } }
 
@@ -30,6 +31,17 @@ namespace Pathfinding{
             }
 
             return -compare;
+        }
+
+        public Node GetNeighbour(NeighbourDirection direction)
+        {
+            return Neighbours[(int)direction];
+        }
+
+        public void SetNeighbour(NeighbourDirection direction, Node node)
+        {
+            Neighbours[(int)direction] = node;
+            node.Neighbours[(int)direction.Opposite()] = this;
         }
     }
 }
