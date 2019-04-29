@@ -12,7 +12,7 @@ public class WaveEffect : MonoBehaviour
     public float XOffset = 0.4f;
     public float YOffset = 0.4f;
     
-    public TimeScaleManager _timeScale;
+    private TimeScaleManager _timeScale;
 
     private TerrainGenerator _terraingGenerator;
     private float _time = 1f;
@@ -22,14 +22,16 @@ public class WaveEffect : MonoBehaviour
     {
         _terraingGenerator = GetComponent<TerrainGenerator>();
         _waterTiles = _terraingGenerator.GetTilesByType(TileType.Water);
+        _timeScale = TimeScaleManager.Instance;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         if(_timeScale != null)
         {
-            _time = _timeScale.Scale;
+            _time = TimeScaleManager.TimeScale;
         }
+
         for(int i = 0; i < _waterTiles.Count; i++)
         {
 

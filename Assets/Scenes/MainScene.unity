@@ -712,6 +712,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a82f1799417264d9a5b4c60b694fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Camera: {fileID: 1911270405}
+  TouchMask:
+    serializedVersion: 2
+    m_Bits: 513
 --- !u!4 &1906935679
 Transform:
   m_ObjectHideFlags: 0

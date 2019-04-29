@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8349011562301993398}
   - component: {fileID: 8639064266735840099}
   - component: {fileID: 1416425296}
+  - component: {fileID: 5583456562268705641}
   m_Layer: 0
   m_Name: iceScale
   m_TagString: Untagged
@@ -102,3 +103,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Type: 5
+--- !u!65 &5583456562268705641
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416425295}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -0.5, y: 0.5, z: 0.5}

@@ -124,7 +124,7 @@ public class CloudGenerator : MonoBehaviour
             int j = cloudIndex;
             
             float x = _batches[i].Clouds[j].X * TexScale + frameParams.Time * Speed.x;
-            float y = _batches[i].Clouds[j].Y * TexScale + frameParams.Time * Speed.x;
+            float y = _batches[i].Clouds[j].Y * TexScale + frameParams.Time * Speed.y;
             float noise = Mathf.PerlinNoise(x, y);
             
             int dir = noise > MinNoiseSize ? 1 : -1;

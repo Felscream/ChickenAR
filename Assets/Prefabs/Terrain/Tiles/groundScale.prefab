@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7245243230386860290}
   - component: {fileID: 5329710983531895289}
   - component: {fileID: 1180641870}
+  - component: {fileID: 7313845418943849302}
   m_Layer: 0
   m_Name: groundScale
   m_TagString: Untagged
@@ -102,3 +103,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Type: 2
+--- !u!65 &7313845418943849302
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180641869}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -0.5, y: 0.5, z: 0.5}

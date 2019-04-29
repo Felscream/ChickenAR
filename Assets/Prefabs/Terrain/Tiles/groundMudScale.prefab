@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3837479146074152502}
   - component: {fileID: 5978550412091937830}
   - component: {fileID: 1450054234}
+  - component: {fileID: 6744061199179281541}
+  - component: {fileID: 1652877481822752038}
   m_Layer: 0
   m_Name: groundMudScale
   m_TagString: Untagged
@@ -102,3 +104,29 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Type: 1
+--- !u!65 &6744061199179281541
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450054233}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -0.5, y: 0.5, z: 0.5}
+--- !u!65 &1652877481822752038
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450054233}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -0.5, y: 0.5, z: 0.5}

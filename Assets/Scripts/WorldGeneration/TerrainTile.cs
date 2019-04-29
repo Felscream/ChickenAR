@@ -17,7 +17,7 @@ namespace WorldGenerator
         }
     }
 
-    public class TerrainTile : MonoBehaviour
+    public class TerrainTile : MonoBehaviour, ITouchable
     {
         public delegate void HoverBehaviour(TerrainTile tile);
         public event HoverBehaviour Glow;
@@ -90,14 +90,6 @@ namespace WorldGenerator
             _materialProperty = new MaterialPropertyBlock();    
         }
 
-        private void LateUpdate()
-        {
-            if(Glow != null)
-            {
-                Glow(this);
-            }
-        }
-
         public void SetCoordinates(int x, int y)
         {
             _x = x;
@@ -118,6 +110,20 @@ namespace WorldGenerator
         public int DistanceTo(TerrainTile t)
         {
             return Mathf.RoundToInt(Vector2.Distance(new Vector2(X, Y), new Vector2(t.X, t.Y)));
+        }
+
+        public void OnTouchDown()
+        {
+            IsHovered = true;
+            if(Glow != null)
+                Glow(this);
+        }
+
+        public void OnTouchUp()
+        {
+            IsHovered = false;
+            if (Glow != null)
+                Glow(this);
         }
     }
 }

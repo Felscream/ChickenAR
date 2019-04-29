@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7818070572277909627}
   - component: {fileID: 5462535444424224350}
   - component: {fileID: 467363205}
+  - component: {fileID: 3102553665079992660}
   m_Layer: 0
   m_Name: stoneDarkerGrassScale
   m_TagString: Untagged
@@ -102,3 +103,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Type: 8
+--- !u!65 &3102553665079992660
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467363204}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -0.5, y: 0.5, z: 0.5}
