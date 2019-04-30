@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
+public class Card : MonoBehaviour, IDraggable
 {
     private RectTransform _rectTransform;
     private Vector2 _originalPivot;
