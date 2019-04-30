@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainScene.unity
     guid: 8c84e780b2683604884dceec2847be77
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/ProceduralGeneration.unity
     guid: 2c78999241b52b44a8ebac47cb55581f
   - enabled: 0

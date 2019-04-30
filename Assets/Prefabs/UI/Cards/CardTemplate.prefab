@@ -86,6 +86,8 @@ GameObject:
   - component: {fileID: 8693510525269853486}
   - component: {fileID: 8693510525269853481}
   - component: {fileID: 1374258309}
+  - component: {fileID: 2171715838920534547}
+  - component: {fileID: 208952311416118770}
   m_Layer: 5
   m_Name: CardTemplate
   m_TagString: Untagged
@@ -163,6 +165,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64508f1870807948b4b55b2e8415a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardName: {fileID: 8693510525827417648}
+  SmoothTime: 0.15
+--- !u!114 &2171715838920534547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8693510525269853483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 150
+  m_PreferredHeight: 200
+  m_FlexibleWidth: 0
+  m_FlexibleHeight: 0
+  m_LayoutPriority: 1
+--- !u!225 &208952311416118770
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8693510525269853483}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8693510525827417650
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class Hand : MonoBehaviour
     public Card CardPrefab;
     public int HandSize;
     public RectTransform CardHolder;
+    public Canvas ParentCanvas;
 
     private RectTransform _rectTransform;
     private Card[] _cards;
@@ -20,14 +21,43 @@ public class Hand : MonoBehaviour
         FillHand();
     }
 
+    private void OnDestroy()
+    {
+        for(int i = 0; i < HandSize; i++)
+        {
+            if(_cards[i] != null)
+            {
+                _cards[i].OnCardDragBegin -= OnCardDragBegin;
+                _cards[i].OnCardDragEnd -= OnCardDragEnd;
+            }
+        }
+    }
+
     private void FillHand()
     {
-        float spacing = CardHolder.sizeDelta.x / HandSize;
-        int halfHandSize = HandSize / 2;
-        for (int i = -halfHandSize; i < halfHandSize + 1; i++)
+        for (int i = 0; i < HandSize; i++)
         {
             Card c = Instantiate(CardPrefab, CardHolder);
-            c.transform.localPosition = Vector3.right * spacing * i;
+            c.ParentCanvas = ParentCanvas;
+            c.AppendToCardName(" " + i);
+            AddCardToHand(c);
         }
+    }
+
+    private void AddCardToHand(Card c)
+    {
+        c.OnCardDragBegin += OnCardDragBegin;
+        c.OnCardDragEnd += OnCardDragEnd;
+    }
+
+    private void OnCardDragBegin(Card c)
+    {
+        c.OriginalParent = c.transform.parent;
+        c.transform.SetParent(transform);
+    }
+
+    private void OnCardDragEnd(Card c)
+    {
+        c.transform.SetParent(c.OriginalParent);
     }
 }
