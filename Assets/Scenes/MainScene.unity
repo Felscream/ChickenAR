@@ -317,19 +317,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2817d72245799ea4098d6992eaade785, type: 3}
---- !u!1 &226958248 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8303096105513415021, guid: 7a67d91c390fa2f4db963a536772deda,
-    type: 3}
-  m_PrefabInstance: {fileID: 1403411368}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &226958249 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8303096105513415022, guid: 7a67d91c390fa2f4db963a536772deda,
     type: 3}
   m_PrefabInstance: {fileID: 1403411368}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 226958248}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c512b143530a3af45b2eb4ecf33c71af, type: 3}
@@ -341,18 +335,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1403411368}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &226958253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 226958248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce2ce753736258d4d880e4e71c1c4f7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &433936243
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,11 +833,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8303096105513415023, guid: 7a67d91c390fa2f4db963a536772deda,
-        type: 3}
-      propertyPath: _timeScale
-      value: 
-      objectReference: {fileID: 170076737}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a67d91c390fa2f4db963a536772deda, type: 3}
 --- !u!4 &1546265700 stripped
@@ -1195,6 +1172,7 @@ MonoBehaviour:
   _terrain: {fileID: 226958249}
   InteractableTile: {r: 0, g: 2, b: 0.1882353, a: 0}
   BlockedTile: {r: 2, g: 0, b: 0, a: 0}
+  AreTilesSelectable: 0
 --- !u!1 &2033975053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1606,5 +1584,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1911270405}
+    - target: {fileID: 1588463424071928060, guid: f9b4c1eb7aee70440bde15f0756971aa,
+        type: 3}
+      propertyPath: TileSelection
+      value: 
+      objectReference: {fileID: 2017172725}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b4c1eb7aee70440bde15f0756971aa, type: 3}

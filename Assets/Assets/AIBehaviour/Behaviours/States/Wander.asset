@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09f12a9b8fb5e44eb81fa499afbecc4, type: 3}
   m_Name: Wander
   m_EditorClassIdentifier: 
-  onFixed:
+  onFixed: []
+  onUpdate:
   - {fileID: 11400000, guid: c5e5a1bdf787489478efe188ebd92df0, type: 2}
-  onUpdate: []
   onEnter: []
   onExit: []
   idCount: 1

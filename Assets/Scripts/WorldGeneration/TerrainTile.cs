@@ -20,7 +20,7 @@ namespace WorldGenerator
     public class TerrainTile : MonoBehaviour, ITouchable
     {
         public delegate void HoverBehaviour(TerrainTile tile);
-        public event HoverBehaviour Glow;
+        public event HoverBehaviour OnTileHover;
 
         public Vector3 PivotOffset = new Vector3(-0.5f, 0.5f, 0.5f);
         [Range(0f,1f)] public float FeatureProbability;
@@ -115,15 +115,15 @@ namespace WorldGenerator
         public void OnTouchDown()
         {
             IsHovered = true;
-            if(Glow != null)
-                Glow(this);
+            if(OnTileHover != null)
+                OnTileHover(this);
         }
 
         public void OnTouchUp()
         {
             IsHovered = false;
-            if (Glow != null)
-                Glow(this);
+            if (OnTileHover != null)
+                OnTileHover(this);
         }
     }
 }

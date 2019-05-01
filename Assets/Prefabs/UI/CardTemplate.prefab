@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CardName: {fileID: 8693510525827417648}
-  SmoothTime: 0.15
+  SmoothTime: 0.1
 --- !u!114 &2171715838920534547
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -112,13 +112,31 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &79017252 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8303096105513415021, guid: 7a67d91c390fa2f4db963a536772deda,
+    type: 3}
+  m_PrefabInstance: {fileID: 8303096105640581288}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &79017256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79017252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2ce753736258d4d880e4e71c1c4f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &162310598 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8303096105513415022, guid: 7a67d91c390fa2f4db963a536772deda,
     type: 3}
   m_PrefabInstance: {fileID: 8303096105640581288}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 79017252}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c512b143530a3af45b2eb4ecf33c71af, type: 3}
@@ -316,6 +334,7 @@ MonoBehaviour:
   _terrain: {fileID: 162310598}
   InteractableTile: {r: 0.039215688, g: 1.5921569, b: 0, a: 0}
   BlockedTile: {r: 2, g: 0, b: 0, a: 0}
+  AreTilesSelectable: 0
 --- !u!4 &625492156
 Transform:
   m_ObjectHideFlags: 0
@@ -341,11 +360,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HandUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 1588463423019438121, guid: f9b4c1eb7aee70440bde15f0756971aa,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1588463423019438125, guid: f9b4c1eb7aee70440bde15f0756971aa,
         type: 3}
@@ -454,39 +468,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1588463423019438124, guid: f9b4c1eb7aee70440bde15f0756971aa,
         type: 3}
-      propertyPath: m_RenderMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1588463423019438124, guid: f9b4c1eb7aee70440bde15f0756971aa,
-        type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 269634639}
-    - target: {fileID: 1588463423019438124, guid: f9b4c1eb7aee70440bde15f0756971aa,
+    - target: {fileID: 1588463424071928060, guid: f9b4c1eb7aee70440bde15f0756971aa,
         type: 3}
-      propertyPath: m_PlaneDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2076013039, guid: f9b4c1eb7aee70440bde15f0756971aa, type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2076013039, guid: f9b4c1eb7aee70440bde15f0756971aa, type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2076013039, guid: f9b4c1eb7aee70440bde15f0756971aa, type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2076013039, guid: f9b4c1eb7aee70440bde15f0756971aa, type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2076013039, guid: f9b4c1eb7aee70440bde15f0756971aa, type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: TileSelection
+      value: 
+      objectReference: {fileID: 625492155}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b4c1eb7aee70440bde15f0756971aa, type: 3}
 --- !u!1 &1652657340
@@ -544,6 +533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1692205340}
   - component: {fileID: 1692205339}
+  - component: {fileID: 1692205341}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -603,6 +593,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1692205341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692205338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d6248cb180724249aebacb33459181d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scale: 1
 --- !u!1 &1865352049
 GameObject:
   m_ObjectHideFlags: 0

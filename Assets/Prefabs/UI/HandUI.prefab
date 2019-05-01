@@ -34,10 +34,10 @@ RectTransform:
   m_Father: {fileID: 1588463423019438125}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -282.89}
-  m_SizeDelta: {x: 0, y: 565.78}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &235381399
 CanvasRenderer:
@@ -356,7 +356,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -572,7 +572,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82030e9d1e9752459f8e704384783ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardPrefab: {fileID: 1374258309, guid: 0da794092c7f4de4699d6686f3a2012d, type: 3}
+  CardPrefab: {fileID: 7231723209145175962, guid: f1f889e594aab7245b0cb5898b855505,
+    type: 3}
   HandSize: 3
   CardHolder: {fileID: 1588463422191017646}
   ParentCanvas: {fileID: 1588463423019438124}
+  DropZone: {fileID: 8382219136051707232}
+  TileSelection: {fileID: 0}
