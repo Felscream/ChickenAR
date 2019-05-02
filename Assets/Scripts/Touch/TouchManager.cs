@@ -9,9 +9,34 @@ public class TouchManager : MonoBehaviour
     public LayerMask TouchMask;
     private ITouchable _oldTouch;
     private ITouchable _currentTouch;
+    
+    public Component CurrentTouchable { get; set; }
+
     private RaycastHit _hit;
+    private static TouchManager _instance;
 
     public Text CountText;
+    public static TouchManager Instance {
+        get {
+            if(_instance == null)
+            {
+                Debug.LogError("No instance of TouchManager");
+            }
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        if(_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            DestroyImmediate(gameObject);
+        }
+    }
 
     private void Update()
     {
@@ -20,6 +45,7 @@ public class TouchManager : MonoBehaviour
         {
             _oldTouch = _currentTouch;
             _currentTouch = null;
+            CurrentTouchable = null;
 
             Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out _hit, TouchMask))
@@ -38,6 +64,7 @@ public class TouchManager : MonoBehaviour
                 {
                     current.OnTouchDown();
                 }
+                current.Register(this);
             }
             
             if (_oldTouch != null && _oldTouch != _currentTouch)
@@ -55,6 +82,7 @@ public class TouchManager : MonoBehaviour
 
             _oldTouch = _currentTouch;
             _currentTouch = null;
+            CurrentTouchable = null;
 
             if (Physics.Raycast(ray, out _hit, TouchMask))
             {
@@ -83,6 +111,7 @@ public class TouchManager : MonoBehaviour
                     {
                         current.OnTouchUp();
                     }
+                    current.Register(this);
                 }
                 
             }

@@ -38,6 +38,7 @@ namespace WorldGenerator
         public bool IsHovered { get; set; }
         public Vector3 FixedLocalPosition { get; set; }
         public bool HasFeature { get; set; }
+        public bool IsAtSurface { get; set; }
 
         public Renderer Renderer {
             get {
@@ -124,6 +125,11 @@ namespace WorldGenerator
             IsHovered = false;
             if (OnTileHover != null)
                 OnTileHover(this);
+        }
+
+        public void Register(TouchManager manager)
+        {
+            manager.CurrentTouchable = this;
         }
     }
 }

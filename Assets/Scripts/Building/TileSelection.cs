@@ -13,19 +13,37 @@ public class TileSelection : MonoBehaviour
     [ColorUsageAttribute(false, true)] public Color BlockedTile;
 
     public bool AreTilesSelectable = false;
-    private TerrainTile _currentTile;
+    public TerrainTile CurrentTile { get; private set; }
 
     private TerrainTile[,] _tiles;
-    public TerrainTile SelectedTile { get { return _currentTile; } }
+    private TouchManager _touchManager;
 
     private void Start()
     {
+        _touchManager = TouchManager.Instance;
         if(_terrain != null)
         {
             _tiles = _terrain.Grid;
             foreach(TerrainTile t in _tiles)
             {
                 t.OnTileHover += TileSelectionBehaviour;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        FetchSelectedTile();
+    }
+
+    private void FetchSelectedTile()
+    {
+        CurrentTile = null;
+        if (_touchManager.CurrentTouchable is TerrainTile temp)
+        {
+            if (temp.IsAtSurface)
+            {
+                CurrentTile = temp;
             }
         }
     }
@@ -49,8 +67,6 @@ public class TileSelection : MonoBehaviour
         tile.MaterialProperty.SetFloat("_EmissionLerp", emissionOn);
 
         tile.Renderer.SetPropertyBlock(tile.MaterialProperty);
-
-        _currentTile = tile;
     }
 
     private void TileSelectionBehaviour(TerrainTile tile)

@@ -7,4 +7,6 @@ public interface ITouchable
     void OnTouchDown();
 
     void OnTouchUp();
+
+    void Register(TouchManager manager);
 }

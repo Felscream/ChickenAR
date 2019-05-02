@@ -183,6 +183,7 @@ namespace WorldGenerator
             tile.FixedLocalPosition = tile.transform.localPosition;
             tile.transform.localScale *= _tileDiameter;
             tile.SetCoordinates(x, y);
+            tile.IsAtSurface = true;
             tile.Neighbours = new TerrainTile[8];
 
             ComputeTileNeighbours(tile, x, y);
@@ -261,6 +262,7 @@ namespace WorldGenerator
             newT.Neighbours = original.Neighbours;
             newT.SearchHeuristic = original.SearchHeuristic;
             newT.SearchPhase = original.SearchPhase;
+            newT.IsAtSurface = original.IsAtSurface;
             newT.NextWithSamePriority = original.NextWithSamePriority;
             _grid[original.X, original.Y] = newT;
             DestroyImmediate(original.gameObject);
