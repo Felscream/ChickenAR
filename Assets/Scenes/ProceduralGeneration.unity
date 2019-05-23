@@ -458,6 +458,11 @@ PrefabInstance:
       propertyPath: TileSelection
       value: 
       objectReference: {fileID: 625492155}
+    - target: {fileID: 1588463424071928060, guid: f9b4c1eb7aee70440bde15f0756971aa,
+        type: 3}
+      propertyPath: HandSize
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b4c1eb7aee70440bde15f0756971aa, type: 3}
 --- !u!1 &1652657340

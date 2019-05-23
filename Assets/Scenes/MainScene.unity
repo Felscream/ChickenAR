@@ -1632,5 +1632,15 @@ PrefabInstance:
       propertyPath: TileSelection
       value: 
       objectReference: {fileID: 2017172725}
+    - target: {fileID: 1588463423019438123, guid: f9b4c1eb7aee70440bde15f0756971aa,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588463423019438123, guid: f9b4c1eb7aee70440bde15f0756971aa,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1920
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b4c1eb7aee70440bde15f0756971aa, type: 3}
